@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="../styles/global.css" />
+        <link rel="stylesheet" href="../styles/settings.css" />
+        <script src="../scripts/global.js"></script>
+        <script src="../scripts/settings.js"></script>
+        <title>Cyanocitta</title>
+    </head>
+    <body>
+        <header></header>
+        <main class="center_horizontal">
+            <div>
+                <h4>Relays</h4>
+                <div class="column" id="relays"></div>
+                <div>
+                    <input class="text" type="text" id="input_relay" placeholder="wss://relay" />
+                    <input class="button" type="button" value="Add relay" onclick="add_relay_element()" />
+                </div>
+            </div>
+            <div class="fit_content">
+                <h4>Profile</h4>
+                <div class="space_between center_vertical">
+                    <label>Name :</label>
+                    <input class="text" type="text" id="name" />
+                </div>
+                <div class="space_between center_vertical">
+                    <label>About :</label>
+                    <input class="text" type="text" id="about" />
+                </div>
+                <div class="space_between center_vertical">
+                    <label>Picture :</label>
+                    <input class="text" type="text" id="picture" />
+                </div>
+                <input class="button" type="button" value="Apply" onclick="apply_profile()" />
+            </div>
+            <div>
+                <h4>Keys</h4>
+                <div class="space_between center_vertical">
+                    <label>Public key :</label>
+                    <div>
+                        <input class="text key" type="text" id="public_key" readonly />
+                        <input class="button" type="button" value="Copy" onclick="copy_input_value('public_key', 'Copied public key!')" />
+                    </div>
+                </div>
+                <div class="space_between center_vertical">
+                    <label>Secret key :</label>
+                    <div>
+                        <input class="text key" type="password" id="secret_key" readonly />
+                        <input class="button" type="button" value="Copy" onclick="copy_input_value('secret_key', 'Copied <b>secret</b> key!')" />
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer></footer>
+    </body>
+</html>

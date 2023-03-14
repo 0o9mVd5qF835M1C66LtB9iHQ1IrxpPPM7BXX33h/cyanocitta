@@ -13,24 +13,24 @@
         <header></header>
         <main>
             <img id="logo" src="media/logo.svg" alt="Cyanocitta" />
+            <h4>Choose relays</h4>
+            <div id="relay_container">
+                <input class="button relay active" type="button" value="wss://nos.lol" onclick="toggle_class(this, 'active')" />
+                <input class="button relay active" type="button" value="wss://nostr-pub.wellorder.net" onclick="toggle_class(this, 'active')" />
+                <input class="button relay active" type="button" value="wss://relay.damus.io" onclick="toggle_class(this, 'active')" />
+                <input class="button relay" type="button" value="wss://nostr.rocks" onclick="toggle_class(this, 'active')" />
+                <input class="button relay active" type="button" value="wss://relay.snort.social" onclick="toggle_class(this, 'active')" />
+                <input class="button relay active" type="button" value="wss://relay.taxi" onclick="toggle_class(this, 'active')" />
+                <input class="button relay" type="button" value="wss://astral.ninja" onclick="toggle_class(this, 'active')" />
+            </div>
             <h4>Create account</h4>
             <div id="account_container">
-                <input class="text" type="text" id="display_name" placeholder="Display name" />
                 <input class="text" type="text" id="name" placeholder="Username" />
+                <input class="text" type="text" id="about" placeholder="About" />
                 <input class="text" type="url" id="picture" placeholder="Picture image URL" />
                 <input class="text" type="password" id="secret_key" placeholder="Secret key" hidden="true" />
                 <input class="button" type="button" id="create_account" value="Create new account" onclick="create_account()" />
                 <input class="button" type="button" id="enter_secret_key" value="...or enter secret key" onclick="enter_secret_key()" />
-            </div>
-            <h4>Choose relays</h4>
-            <div id="relay_container">
-                <input class="button relay selected" type="button" value="wss://nos.lol" onclick="select_relay(this)" />
-                <input class="button relay selected" type="button" value="wss://nostr-pub.wellorder.net" onclick="select_relay(this)" />
-                <input class="button relay selected" type="button" value="wss://relay.damus.io" onclick="select_relay(this)" />
-                <input class="button relay" type="button" value="wss://nostr.rocks" onclick="select_relay(this)" />
-                <input class="button relay selected" type="button" value="wss://relay.snort.social" onclick="select_relay(this)" />
-                <input class="button relay selected" type="button" value="wss://relay.taxi" onclick="select_relay(this)" />
-                <input class="button relay" type="button" value="wss://astral.ninja" onclick="select_relay(this)" />
             </div>
         </main>
         <footer></footer>

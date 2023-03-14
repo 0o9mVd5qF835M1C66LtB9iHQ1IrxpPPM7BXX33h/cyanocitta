@@ -16,6 +16,9 @@ pub type RelayUrl = String;
 pub struct Relay {
     /// Websocket URL.
     pub url: String,
+    /// Whether the relay is active.
+    #[serde(skip)]
+    pub active: bool,
     /// Used for sending messages TO the relay.
     #[serde(skip)]
     pub outgoing_sender: Option<Sender<ClientMessage>>,
@@ -29,7 +32,14 @@ pub struct Relay {
 
 impl Relay {
     /// Connect to relay and start tasks to send/receive messages.
+    ///
+    /// This functions (re)creates `outgoing_sender` and `incoming_sender`.
+    /// Keep this in mind if calling multipile times, as any client will have to restart its listener aswell.
     pub async fn listen(&mut self, buffer: usize) -> Result<()> {
+        // Stop existing listeners if any
+        self.pool.shutdown().await;
+
+        // Connect to websockets
         let (mut ws_outgoing, mut ws_incoming) = ws::connect_async(&self.url).await?.0.split();
 
         // Create channels
@@ -60,13 +70,23 @@ impl Relay {
             Err(anyhow!("closed or lagged behind"))
         });
 
+        // Set to active
+        self.active = true;
+
         Ok(())
     }
 
+    /// Stop listen tasks.
+    pub async fn stop_listen(&mut self) {
+        self.pool.shutdown().await;
+        self.active = false;
+    }
+
     /// Create [`Relay`].
-    pub fn new(url: &str) -> Self {
+    pub fn new(url: RelayUrl) -> Self {
         Self {
-            url: url.to_string(),
+            url,
+            active: false,
             outgoing_sender: None,
             incoming_sender: None,
             pool: JoinSet::new(),
